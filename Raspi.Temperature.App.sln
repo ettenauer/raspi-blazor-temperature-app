@@ -3,11 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raspi.Temperature.App.Server", "source\Server\Raspi.Temperature.App.Server.csproj", "{83EDBF69-2671-4B18-8307-7E9BF4C72F30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raspi.Temperature.App.Server", "source\Server\Raspi.Temperature.App.Server.csproj", "{83EDBF69-2671-4B18-8307-7E9BF4C72F30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raspi.Temperature.App.Client", "source\Client\Raspi.Temperature.App.Client.csproj", "{35E23FB3-CCEA-4C5E-86D6-698E1F21A31C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raspi.Temperature.App.Client", "source\Client\Raspi.Temperature.App.Client.csproj", "{35E23FB3-CCEA-4C5E-86D6-698E1F21A31C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raspi.Temperature.App.Shared", "source\Shared\Raspi.Temperature.App.Shared.csproj", "{EE613008-0D1B-420F-943F-EA6CC5319D05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raspi.Temperature.App.Shared", "source\Shared\Raspi.Temperature.App.Shared.csproj", "{EE613008-0D1B-420F-943F-EA6CC5319D05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E0F937A2-A53B-4A1A-9C2D-B7DF42D4FCC5}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		.github\dependabot.yml = .github\dependabot.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose\docker-compose.dcproj", "{52FFFAA9-A291-4486-96C8-B2A889ECE779}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +38,10 @@ Global
 		{EE613008-0D1B-420F-943F-EA6CC5319D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE613008-0D1B-420F-943F-EA6CC5319D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE613008-0D1B-420F-943F-EA6CC5319D05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52FFFAA9-A291-4486-96C8-B2A889ECE779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52FFFAA9-A291-4486-96C8-B2A889ECE779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52FFFAA9-A291-4486-96C8-B2A889ECE779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52FFFAA9-A291-4486-96C8-B2A889ECE779}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

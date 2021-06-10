@@ -20,6 +20,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose\docker-compose.dcproj", "{52FFFAA9-A291-4486-96C8-B2A889ECE779}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "helm", "helm", "{510BFBEB-4711-4CAE-BE2D-72534EAF67CB}"
+	ProjectSection(SolutionItems) = preProject
+		helm\.helmignore = helm\.helmignore
+		helm\Chart.yaml = helm\Chart.yaml
+		helm\values.yaml = helm\values.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{0C889716-502E-41E3-AC81-ECA5135BB201}"
+	ProjectSection(SolutionItems) = preProject
+		helm\templates\_helpers.tpl = helm\templates\_helpers.tpl
+		helm\templates\configmap.yaml = helm\templates\configmap.yaml
+		helm\templates\deployment.yaml = helm\templates\deployment.yaml
+		helm\templates\service.yaml = helm\templates\service.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +60,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{510BFBEB-4711-4CAE-BE2D-72534EAF67CB} = {E0F937A2-A53B-4A1A-9C2D-B7DF42D4FCC5}
+		{0C889716-502E-41E3-AC81-ECA5135BB201} = {510BFBEB-4711-4CAE-BE2D-72534EAF67CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D0C56CE-44F1-4962-A114-C894D16DEC21}

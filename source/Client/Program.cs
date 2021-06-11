@@ -27,7 +27,7 @@ namespace Raspi.Temperature.App.Client
             builder.Services.AddMsalAuthentication(options =>
             {
                 builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
-                options.ProviderOptions.DefaultAccessTokenScopes.Add("api://api.id.uri/access_as_user");
+                options.ProviderOptions.DefaultAccessTokenScopes.Add("https://ettenaueroutlook.onmicrosoft.com/RaspiTempApp/API.Access");
             });
 
             await builder.Build().RunAsync();

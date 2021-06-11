@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 
 namespace Raspi.Temperature.App.Server.Controllers
 {
-    [Authorize]
+    [RequiredScope("API.Access")]
     [ApiController]
     [Route("[controller]")]
+
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -22,9 +23,6 @@ namespace Raspi.Temperature.App.Server.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        // The Web API will only accept tokens 1) for users, and 2) having the "access_as_user" scope for this API
-        static readonly string[] scopeRequiredByApi = new string[] { "access_as_user" };
-
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
@@ -33,8 +31,6 @@ namespace Raspi.Temperature.App.Server.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            HttpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
-
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

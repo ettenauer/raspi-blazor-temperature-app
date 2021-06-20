@@ -6,4 +6,11 @@ services:
     build:
       context: ../
       dockerfile: source/Server/Dockerfile
+    depends_on:
+        - db
+  db:
+    image: ${DOCKER_REGISTRY-}custom-mssql-server-linux
+    build:
+      context: ../
+      dockerfile: mssql/Dockerfile
 

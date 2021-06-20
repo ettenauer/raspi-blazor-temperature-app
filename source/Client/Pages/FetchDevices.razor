@@ -1,15 +1,15 @@
-﻿@page "/fetchdata"
+﻿@page "/fetchdevices"
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using Raspi.Temperature.App.Shared
 @attribute [Authorize]
 @inject HttpClient Http
 
-<h1>Weather forecast</h1>
+<h1>Temperature Devices</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p>All active temperature devices to select a dashboard</p>
 
-@if (forecasts == null)
+@if (devices == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -18,20 +18,20 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var device in devices)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@device.Id</td>
+                    <td>@device.Name</td>
+                    <td>@device.Latitude</td>
+                    <td>@device.Longitude</td>
                 </tr>
             }
         </tbody>
@@ -39,17 +39,21 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    private Device[] devices;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+            devices = await Http.GetFromJsonAsync<Device[]>("dashboard/devices");
         }
         catch (AccessTokenNotAvailableException exception)
         {
             exception.Redirect();
+        }
+        catch(Exception ex)
+        {
+            throw;
         }
     }
 

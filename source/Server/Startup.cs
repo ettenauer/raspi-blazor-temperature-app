@@ -8,7 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
+using Raspi.Temperature.App.Server.Infrastructure;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Raspi.Temperature.App.Server
 {
@@ -32,8 +34,13 @@ namespace Raspi.Temperature.App.Server
             {
                 options.TokenValidationParameters.NameClaimType = "name";
             });
+
+            services.AddDbContextFactory<RaspiDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RaspiDb")));
+
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +66,9 @@ namespace Raspi.Temperature.App.Server
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3(c => c.DocumentTitle = "Backend api for devices");
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -13,10 +13,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.7" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.11.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Client\Raspi.Temperature.App.Client.csproj" />
+    <ProjectReference Include="..\Server.Infrastructure\Raspi.Temperature.App.Server.Infrastructure.csproj" />
     <ProjectReference Include="..\Shared\Raspi.Temperature.App.Shared.csproj" />
   </ItemGroup>
 

@@ -35,6 +35,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{
 		helm\templates\service.yaml = helm\templates\service.yaml
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raspi.Temperature.App.Server.Infrastructure", "source\Server.Infrastructure\Raspi.Temperature.App.Server.Infrastructure.csproj", "{9CEC0664-5FB9-4F34-BF2A-ADEAF938B942}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mssql", "mssql", "{C40B6CB9-C751-41C3-8CB4-6BD5447D7529}"
+	ProjectSection(SolutionItems) = preProject
+		mssql\Dockerfile = mssql\Dockerfile
+		mssql\entrypoint.sh = mssql\entrypoint.sh
+		mssql\init.sql = mssql\init.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +66,10 @@ Global
 		{52FFFAA9-A291-4486-96C8-B2A889ECE779}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52FFFAA9-A291-4486-96C8-B2A889ECE779}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52FFFAA9-A291-4486-96C8-B2A889ECE779}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CEC0664-5FB9-4F34-BF2A-ADEAF938B942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CEC0664-5FB9-4F34-BF2A-ADEAF938B942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CEC0664-5FB9-4F34-BF2A-ADEAF938B942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CEC0664-5FB9-4F34-BF2A-ADEAF938B942}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +77,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{510BFBEB-4711-4CAE-BE2D-72534EAF67CB} = {E0F937A2-A53B-4A1A-9C2D-B7DF42D4FCC5}
 		{0C889716-502E-41E3-AC81-ECA5135BB201} = {510BFBEB-4711-4CAE-BE2D-72534EAF67CB}
+		{C40B6CB9-C751-41C3-8CB4-6BD5447D7529} = {E0F937A2-A53B-4A1A-9C2D-B7DF42D4FCC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D0C56CE-44F1-4962-A114-C894D16DEC21}

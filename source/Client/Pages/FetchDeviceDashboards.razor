@@ -1,0 +1,90 @@
+﻿@page "/fetchdevicedashboards"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using Raspi.Temperature.App.Shared
+@attribute [Authorize]
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+@if (devices == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" @onclick="UnselectDevice">Dashboards</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                @foreach (var device in devices)
+                {
+                    <a class="@GetNavItemClass(device)" @onclick="() => SelectDeviceAsync(device)">@device.Name <span class="sr-only">(current)</span></a>
+                }
+            </div>
+        </div>
+    </nav>
+
+    <div class="align-bottom">
+        <div>
+            <canvas id="deviceChart"></canvas>
+        </div>
+    </div>
+}
+
+@code {
+    private Device[] devices;
+    private Device selectedDevice;
+    private DeviceDashboard deviceDashboard;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            devices = await Http.GetFromJsonAsync<Device[]>("app/devices");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    private async Task SelectDeviceAsync(Device device)
+    {
+        try
+        {
+            deviceDashboard = await Http.GetFromJsonAsync<DeviceDashboard>($"app/devicedashboard?deviceId={device.Id}");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+
+        await UpdateChartAsync(device, deviceDashboard);
+        selectedDevice = device;
+    }
+
+    private async Task UpdateChartAsync(Device device, DeviceDashboard deviceDashboard)
+    {
+        var groupedValues = deviceDashboard.TemperatureHistory.GroupBy(_ => _.Date.ToString("dd.MM.yy HH:mm"), _ => _.DegreeCelsius);
+        var lables = groupedValues.Select(_ => _.Key);
+        var values = groupedValues.Select(_ => _.Max());
+        await JS.InvokeVoidAsync("updateChart", "deviceChart", $"Degree Celisus from {device.Name}", lables, values);
+    }
+
+    private void UnselectDevice()
+    {
+        selectedDevice = null;
+        deviceDashboard = null;
+    }
+
+    private string GetNavItemClass(Device device)
+    {
+        var defaultClass = "nav-item nav-link";
+        var activeClass = "nav-item nav-link active";
+
+        return selectedDevice?.Id == device.Id ? activeClass : defaultClass;
+    }
+}

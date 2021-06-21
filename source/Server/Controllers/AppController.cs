@@ -13,15 +13,15 @@ using System.Threading.Tasks;
 
 namespace Raspi.Temperature.App.Server.Controllers
 {
-    //[RequiredScope("API.Access")]
+    [RequiredScope("API.Access")]
     [ApiController]
     [Route("[controller]")]
-    public class DashboardController : ControllerBase
+    public class AppController : ControllerBase
     {
-        private readonly ILogger<DashboardController> logger;
+        private readonly ILogger<AppController> logger;
         private readonly IDbContextFactory<RaspiDbContext> dbContextFactory;
 
-        public DashboardController(IDbContextFactory<RaspiDbContext> dbContextFactory, ILogger<DashboardController> logger)
+        public AppController(IDbContextFactory<RaspiDbContext> dbContextFactory, ILogger<AppController> logger)
         {
             this.dbContextFactory = dbContextFactory ?? throw new ArgumentNullException(nameof(dbContextFactory));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));

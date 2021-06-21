@@ -2,12 +2,11 @@
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using Raspi.Temperature.App.Shared
+@using System.Globalization;
 @attribute [Authorize]
 @inject HttpClient Http
 
-<h1>Temperature Devices</h1>
-
-<p>All active temperature devices to select a dashboard</p>
+<h1>Active Temperature Devices</h1>
 
 @if (devices == null)
 {
@@ -20,18 +19,19 @@ else
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
+                <th>Location</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var device in devices)
             {
+
+                var enGBCulture = CultureInfo.CreateSpecificCulture("en-GB");
+                var googleMapsUrl = $"http://maps.google.com/?q={device.Latitude.ToString(enGBCulture)},{device.Longitude.ToString(enGBCulture)}";
                 <tr>
                     <td>@device.Id</td>
                     <td>@device.Name</td>
-                    <td>@device.Latitude</td>
-                    <td>@device.Longitude</td>
+                    <td><a href="@googleMapsUrl" target="_blank">Location</a></td>
                 </tr>
             }
         </tbody>
@@ -45,15 +45,11 @@ else
     {
         try
         {
-            devices = await Http.GetFromJsonAsync<Device[]>("dashboard/devices");
+            devices = await Http.GetFromJsonAsync<Device[]>("app/devices");
         }
         catch (AccessTokenNotAvailableException exception)
         {
             exception.Redirect();
-        }
-        catch(Exception ex)
-        {
-            throw;
         }
     }
 

@@ -40,7 +40,8 @@ GO
 
 INSERT INTO dbo.tabDevice(fId, fName, fLatitude, fLongitude, fActive)
 VALUES
-(1, 'HomePi', 48.20849, 16.37208, 1)
+(1, 'MeidlingPi', 48.20849, 16.37208, 1),
+(2, 'HietzingPi', 40.20849, 10.37208, 1)
 
 CREATE SEQUENCE dbo.SQ_tabTemperatureHistory_fId
     START WITH 1
@@ -57,6 +58,18 @@ CREATE TABLE tabTemperatureHistory
     CONSTRAINT PK_tabTemperatureHistory_fId PRIMARY KEY CLUSTERED (fId),
     CONSTRAINT FK_tabDevice_tabTemperatureHistory FOREIGN KEY (frDeviceId) REFERENCES tabDevice (fId)
 )
+GO
+
+INSERT INTO dbo.tabTemperatureHistory(fDate, fDegreeCelsius, frDeviceId)
+VALUES
+('2020-06-19 00:00:00', 18.6, 1),
+('2020-06-19 12:00:00', 30.6, 1),
+('2020-06-20 00:00:00', 20.6, 1),
+('2020-06-20 12:00:00', 31.6, 1),
+('2020-06-21 00:00:00', 20.6, 1),
+('2020-06-21 12:00:00', 28.6, 1),
+('2020-06-19 00:00:00', 18.6, 2)
+
 GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Surrogate key for device temperature records' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'tabTemperatureHistory', @level2type=N'COLUMN',@level2name=N'fId'

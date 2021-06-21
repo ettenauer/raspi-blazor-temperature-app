@@ -5,10 +5,12 @@ using Raspi.Temperature.App.Server.Infrastructure;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Web.Resource;
 
 namespace Raspi.Temperature.App.Server.Controllers
 {
     [ApiController]
+    [RequiredScope("API.Access")]
     [Route("api/[controller]")]
     public class DeviceController : ControllerBase
     {

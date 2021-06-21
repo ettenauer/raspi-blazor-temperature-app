@@ -2,29 +2,28 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Microsoft.Identity.Web.Resource;
 using Raspi.Temperature.App.Server.Extensions;
 using Raspi.Temperature.App.Server.Infrastructure;
 using Raspi.Temperature.App.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Raspi.Temperature.App.Server.Controllers
 {
-    [RequiredScope("API.Access")]
+    
     [ApiController]
     [Route("[controller]")]
+    [Authorize(Roles = "AppUser")]
     public class AppController : ControllerBase
     {
-        private readonly ILogger<AppController> logger;
         private readonly IDbContextFactory<RaspiDbContext> dbContextFactory;
 
-        public AppController(IDbContextFactory<RaspiDbContext> dbContextFactory, ILogger<AppController> logger)
+        public AppController(IDbContextFactory<RaspiDbContext> dbContextFactory)
         {
             this.dbContextFactory = dbContextFactory ?? throw new ArgumentNullException(nameof(dbContextFactory));
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [HttpGet]

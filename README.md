@@ -1,7 +1,18 @@
 # raspi-blazor-temperature-app
-Simple WebApp which presents temperature data recorded from a raspi
+The project is part of proof of concept system to verify following technologies:
+* Edge to Cloud/K8s (with Raspi)
+* Services hosted in K8s using Helm
+* Services hosted in AKS using Helm
+* Balzor SPA
+* Azure Identity 
+* Inner Dev Loop with Docker-Compose and MiniKube
 
-# Run local build docker image on local machine
+![System Design](https://github.com/ettenauer/extension-confluent-kafka-client/tree/main/images/SystemDesign.PNG)
+
+# Prerequisite
+* Azure account
+
+# Run build immages local
 ## Docker-Compose
 * open powershell/cmd
 * navigate to docker-compose folder in repo

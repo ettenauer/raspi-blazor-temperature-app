@@ -32,6 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{
 		helm\templates\_helpers.tpl = helm\templates\_helpers.tpl
 		helm\templates\configmap.yaml = helm\templates\configmap.yaml
 		helm\templates\deployment.yaml = helm\templates\deployment.yaml
+		helm\templates\ingress.yaml = helm\templates\ingress.yaml
 		helm\templates\service.yaml = helm\templates\service.yaml
 	EndProjectSection
 EndProject
@@ -47,6 +48,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{674E3260-9655-4E13-87B6-05DBB553CCB9}"
 	ProjectSection(SolutionItems) = preProject
 		images\SystemDesign.PNG = images\SystemDesign.PNG
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{76A3BBB4-2F34-45DB-8622-3EBBE9DF36FB}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\ci.yml = .github\workflows\ci.yml
+		.github\workflows\dev-release.yml = .github\workflows\dev-release.yml
 	EndProjectSection
 EndProject
 Global
@@ -84,6 +91,7 @@ Global
 		{0C889716-502E-41E3-AC81-ECA5135BB201} = {510BFBEB-4711-4CAE-BE2D-72534EAF67CB}
 		{C40B6CB9-C751-41C3-8CB4-6BD5447D7529} = {E0F937A2-A53B-4A1A-9C2D-B7DF42D4FCC5}
 		{674E3260-9655-4E13-87B6-05DBB553CCB9} = {E0F937A2-A53B-4A1A-9C2D-B7DF42D4FCC5}
+		{76A3BBB4-2F34-45DB-8622-3EBBE9DF36FB} = {E0F937A2-A53B-4A1A-9C2D-B7DF42D4FCC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D0C56CE-44F1-4962-A114-C894D16DEC21}

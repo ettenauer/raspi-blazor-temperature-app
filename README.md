@@ -9,8 +9,9 @@ The project is part of proof of concept system to verify following technologies:
 
 ![System Design](https://github.com/ettenauer/extension-confluent-kafka-client/tree/main/images/SystemDesign.PNG)
 
-# Prerequisite
-* Azure account
+# Prerequisites
+* Azure account to configure Azure Identity (Scope and AppRole)
+* Azure account to create AKS cluster if local K8s cluster exists
 
 # Run build immages local
 ## Docker-Compose

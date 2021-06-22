@@ -15,8 +15,13 @@ nameOverride: ""
 fullnameOverride: ""
 
 service:
+  name: web
   type: ClusterIP
   port: 80
+
+ingress:
+ host: rapbi.local
+ path: /app
 
 resources:
   # We usually recommend not to specify default resources and to leave this as a conscious

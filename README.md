@@ -7,7 +7,7 @@ The project is part of proof of concept system to verify following technologies:
 * Azure Identity 
 * Inner Dev Loop with Docker-Compose and MiniKube
 
-![System Design](https://github.com/ettenauer/extension-confluent-kafka-client/tree/main/images/SystemDesign.PNG)
+![System Design](https://github.com/ettenauer/raspi-blazor-temperature-app/blob/master/images/SystemDesign.PNG)
 
 # Prerequisite
 * Azure account

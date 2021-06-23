@@ -37,18 +37,18 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build and push Raspi.Temperature.App.Server
+      - name: Build and push raspi.temperature.app.server
         uses: docker/build-push-action@v2
         with:
           context: ../
           dockerfile: source/Server/Dockerfile
           push: true
-          tags: ettenauer/Raspi.Temperature.App:latest
+          tags: ettenauer/raspi.temperature.app:latest
 
-      - name: Build and push Raspi.Temperature.App.SqlDb
+      - name: Build and push raspi.temperature.app.sqldb
         uses: docker/build-push-action@v2
         with:
           context: ../
           dockerfile: mssql/Dockerfile
           push: true
-          tags: ettenauer/Raspi.Temperatuzre.SqlDB:latest
+          tags: ettenauer/raspi.temperature.app.sqldb:latest

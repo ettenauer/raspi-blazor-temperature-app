@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          dockerfile: source/Server/Dockerfile
+          file: source/Server/Dockerfile
           push: true
           tags: ettenauer/raspi.temperature.app:latest
 
@@ -46,6 +46,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          dockerfile: mssql/Dockerfile
+          file: mssql/Dockerfile
           push: true
           tags: ettenauer/raspi.temperature.app.sqldb:latest

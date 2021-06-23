@@ -3,7 +3,7 @@ The project is part of proof of concept system to verify following technologies:
 * Edge to Cloud/K8s (with Raspi)
 * Services hosted in K8s using Helm
 * Services hosted in AKS using Helm
-* Balzor SPA
+* Blazor WebAssembly
 * Azure Identity 
 * Inner Dev Loop with Docker-Compose and MiniKube
 

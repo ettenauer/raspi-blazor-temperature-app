@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: Docker Build and Push Manual
+name: docker raspi db docker build
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -35,28 +35,13 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/{{ env.USER }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          file: source/Server/Dockerfile
+          file: mssql/Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      #- name: Build and push raspi.temperature.app.server
-      #  uses: docker/build-push-action@v2
-      #  with:
-      #    context: .
-      #    file: source/Server/Dockerfile
-      #    push: true
-      #    tags: ettenauer/raspi.temperature.app:latest
-
-      #- name: Build and push raspi.temperature.app.sqldb
-      #  uses: docker/build-push-action@v2
-      #  with:
-      #    context: .
-      #    file: mssql/Dockerfile
-      #    push: true
-      #    tags: ettenauer/raspi.temperature.app.sqldb:latest

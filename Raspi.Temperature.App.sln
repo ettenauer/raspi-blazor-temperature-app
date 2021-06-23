@@ -53,7 +53,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{76A3BBB4-2F34-45DB-8622-3EBBE9DF36FB}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build.yml = .github\workflows\build.yml
-		.github\workflows\docker-manual.yml = .github\workflows\docker-manual.yml
+		.github\workflows\docker-raspi-app.yml = .github\workflows\docker-raspi-app.yml
+		.github\workflows\docker-raspi-db.yml = .github\workflows\docker-raspi-db.yml
 	EndProjectSection
 EndProject
 Global

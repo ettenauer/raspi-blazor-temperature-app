@@ -12,7 +12,6 @@ env:
   IMAGE_NAME: ${{ github.repository }}
   PASSWORD: ${{ secrets.GITHUB_TOKEN }}
   USER: ${{ github.actor }}
-  WORKDIR: ./src
 
 jobs:
   build-and-push-image:
@@ -33,7 +32,7 @@ jobs:
           password: ${{env.PASSWORD}}
 
       - name: Extract metadata
-        run: echo "${{ env.WORKDIR }}"
+        run: ls
 
       - name: Build and push raspi.temperature.app.server
         uses: docker/build-push-action@v2

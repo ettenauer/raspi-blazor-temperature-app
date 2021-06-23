@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Raspi.Temperature.App.Server.Infrastructure.Model;
-using System;
 
 namespace Raspi.Temperature.App.Server.Infrastructure.Configuration
 {

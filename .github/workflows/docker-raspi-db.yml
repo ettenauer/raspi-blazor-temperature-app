@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: raspi db docker build
+name: db docker build
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -35,7 +35,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ env.REGISTRY }}/{{ env.USER }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-sqldb
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "helm.fullname" . }}
+  name: "{{ include "helm.fullname" . }}-server"
   labels:
     {{- include "helm.labels" . | nindent 4 }}
 spec:
@@ -22,11 +22,13 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.imageApp.repository }}:{{ .Values.imageApp.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.imageApp.pullPolicy }}
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
           resources:
+
             {{- toYaml .Values.resources | nindent 12 }}
+

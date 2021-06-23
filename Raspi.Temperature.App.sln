@@ -31,8 +31,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{
 	ProjectSection(SolutionItems) = preProject
 		helm\templates\_helpers.tpl = helm\templates\_helpers.tpl
 		helm\templates\configmap.yaml = helm\templates\configmap.yaml
-		helm\templates\deployment.yaml = helm\templates\deployment.yaml
+		helm\templates\db_deployment.yaml = helm\templates\db_deployment.yaml
 		helm\templates\ingress.yaml = helm\templates\ingress.yaml
+		helm\templates\server_deployment.yaml = helm\templates\server_deployment.yaml
 		helm\templates\service.yaml = helm\templates\service.yaml
 	EndProjectSection
 EndProject

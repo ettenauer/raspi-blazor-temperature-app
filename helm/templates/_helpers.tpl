@@ -51,6 +51,24 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+AppServer Selector labels
+*/}}
+{{- define "helm.selectorLabelsAppServer" -}}
+app.kubernetes.io/name: {{ include "helm.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/part-of: {{ .Values.app.name }}
+{{- end }}
+
+{{/*
+Db Selector labels
+*/}}
+{{- define "helm.selectorLabelsDb" -}}
+app.kubernetes.io/name: {{ include "helm.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/part-of: {{ .Values.db.name }}
+{{- end }}
+
+{{/*
 Create the name of the service account to use
 */}}
 {{- define "helm.serviceAccountName" -}}

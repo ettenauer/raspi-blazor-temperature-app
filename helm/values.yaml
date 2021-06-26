@@ -6,28 +6,25 @@ replicaCount: 1
 
 imageApp:
   repository: ghcr.io/ettenauer/raspi-blazor-temperature-app
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
+  pullPolicy: Always
   tag: "master"
 
 imageDb:
   repository: ghcr.io/ettenauer/raspi-blazor-temperature-app-sqldb
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
   tag: "master"
 
 imagePullSecret: "private-docker-registry-cred"
-nameOverride: ""
-fullnameOverride: ""
 
-service:
-  name: web
-  type: ClusterIP
-  port: 80
+db:
+ name: db
+
+app:
+ name: appserver
 
 ingress:
-   host: raspi.local
-   path: /app
+ tlsSecret: local-tls
+ host: raspi.local
 
 resources:
   # We usually recommend not to specify default resources and to leave this as a conscious

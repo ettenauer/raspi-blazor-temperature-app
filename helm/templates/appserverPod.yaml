@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{ include "helm.fullname" . }}-server"
+  name: {{ .Values.app.name }}
   labels:
     {{- include "helm.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "helm.selectorLabels" . | nindent 6 }}
+      {{- include "helm.selectorLabelsAppServer" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -16,7 +16,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "helm.selectorLabels" . | nindent 8 }}
+        {{- include "helm.selectorLabelsAppServer" . | nindent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -25,10 +25,10 @@ spec:
           image: "{{ .Values.imageApp.repository }}:{{ .Values.imageApp.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.imageApp.pullPolicy }}
           ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
+            - containerPort: 80
           resources:
 
             {{- toYaml .Values.resources | nindent 12 }}
 
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecret }}

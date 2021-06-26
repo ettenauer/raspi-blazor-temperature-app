@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{ include "helm.fullname" . }}-db"
+  name: {{ .Values.db.name }}
   labels:
     {{- include "helm.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "helm.selectorLabels" . | nindent 6 }}
+      {{- include "helm.selectorLabelsDb" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -16,10 +16,10 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "helm.selectorLabels" . | nindent 8 }}
+        {{- include "helm.selectorLabelsDb" . | nindent 8 }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Values.db.name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.imageDb.repository }}:{{ .Values.imageDb.tag | default .Chart.AppVersion }}"
@@ -27,6 +27,8 @@ spec:
           ports:
             - containerPort: 1433
           env:
+            - name: MSSQL_PID 
+              value: "Developer" 
             - name: ACCEPT_EULA
               value: "Y"
             - name: SA_PASSWORD
@@ -39,9 +41,7 @@ spec:
 
       volumes:
        - name: mssqldir
-         hostPath:
-            path: /var/opt/mssql
-            type: DirectoryOrCreate
+         emptyDir: {}
 
       imagePullSecrets:
-        - name: private-docker-registry-cred
+        - name: {{ .Values.imagePullSecret }}

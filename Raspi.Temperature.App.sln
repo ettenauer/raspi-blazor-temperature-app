@@ -30,11 +30,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{0C889716-502E-41E3-AC81-ECA5135BB201}"
 	ProjectSection(SolutionItems) = preProject
 		helm\templates\_helpers.tpl = helm\templates\_helpers.tpl
+		helm\templates\appserverPod.yaml = helm\templates\appserverPod.yaml
+		helm\templates\appserverService.yaml = helm\templates\appserverService.yaml
 		helm\templates\configmap.yaml = helm\templates\configmap.yaml
-		helm\templates\db_deployment.yaml = helm\templates\db_deployment.yaml
+		helm\templates\dbPod.yaml = helm\templates\dbPod.yaml
+		helm\templates\dbService.yaml = helm\templates\dbService.yaml
 		helm\templates\ingress.yaml = helm\templates\ingress.yaml
-		helm\templates\server_deployment.yaml = helm\templates\server_deployment.yaml
-		helm\templates\service.yaml = helm\templates\service.yaml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raspi.Temperature.App.Server.Infrastructure", "source\Server.Infrastructure\Raspi.Temperature.App.Server.Infrastructure.csproj", "{9CEC0664-5FB9-4F34-BF2A-ADEAF938B942}"

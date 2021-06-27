@@ -21,6 +21,7 @@ The project is part of proof of concept system to verify following technologies:
 # Run on Docker Desktop K8s with Helm
 ## Cluster Setup
 * install Docker Destop and activate K8s
+* kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.47.0/deploy/static/provider/cloud/deploy.yaml
 * create secret for image repository:
 	* kubectl create secret docker-registry private-docker-registry-cred --docker-server=https://ghcr.io --docker-username=<USERNAME> --docker-password=<PASSWORD> --namespace=default -o yaml
 * create secret self-signed TLS certificate for ingress (CN -> *.local):

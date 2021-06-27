@@ -34,6 +34,8 @@ spec:
               value: "Y"
             - name: SA_PASSWORD
               value: "P@ssword"
+            - name: APP_USER_PASSWORD
+              value: "@Password"
           volumeMounts:
             - name: mssqldir
               mountPath: /var/opt/mssql

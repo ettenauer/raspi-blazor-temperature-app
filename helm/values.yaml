@@ -16,6 +16,9 @@ imageDb:
 
 imagePullSecret: "private-docker-registry-cred"
 
+config:
+ appConfig: appserver-config
+
 db:
  name: db
 

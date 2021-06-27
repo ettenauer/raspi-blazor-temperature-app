@@ -30,9 +30,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{0C889716-502E-41E3-AC81-ECA5135BB201}"
 	ProjectSection(SolutionItems) = preProject
 		helm\templates\_helpers.tpl = helm\templates\_helpers.tpl
+		helm\templates\appserverConfigmap.yaml = helm\templates\appserverConfigmap.yaml
 		helm\templates\appserverPod.yaml = helm\templates\appserverPod.yaml
 		helm\templates\appserverService.yaml = helm\templates\appserverService.yaml
-		helm\templates\configmap.yaml = helm\templates\configmap.yaml
 		helm\templates\dbPod.yaml = helm\templates\dbPod.yaml
 		helm\templates\dbService.yaml = helm\templates\dbService.yaml
 		helm\templates\ingress.yaml = helm\templates\ingress.yaml

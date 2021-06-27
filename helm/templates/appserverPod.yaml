@@ -26,9 +26,20 @@ spec:
           imagePullPolicy: {{ .Values.imageApp.pullPolicy }}
           ports:
             - containerPort: 80
+          volumeMounts:
+          - name: config-volume
+            mountPath: /app/appsettings.json # This should be your final destination
+            subPath: appsettings.json  # The name of the file to be placed inside /etc, the filename used here and in mountPath should be same.
           resources:
 
             {{- toYaml .Values.resources | nindent 12 }}
-
+      volumes:
+        - name: config-volume
+          configMap:
+            # Provide the name of the ConfigMap containing the files you want
+            name: {{ .Values.config.appConfig }}
+            items:
+             - key: appsettings.json  # Name of the item we had used inside our ConfigMap (under data:)
+               path: appsettings.json # Name of the file to be placed inside /etc
       imagePullSecrets:
         - name: {{ .Values.imagePullSecret }}

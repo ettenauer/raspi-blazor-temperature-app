@@ -22,10 +22,10 @@ The project is part of proof of concept system to verify following technologies:
 ## Cluster Setup
 * install Docker Destop and activate K8s
 * create secret for image repository:
-** kubectl create secret docker-registry private-docker-registry-cred --docker-server=https://ghcr.io --docker-username=<USERNAME> --docker-password=<PASSWORD> --namespace=default -o yaml
+	* kubectl create secret docker-registry private-docker-registry-cred --docker-server=https://ghcr.io --docker-username=<USERNAME> --docker-password=<PASSWORD> --namespace=default -o yaml
 * create secret self-signed TLS certificate for ingress (CN -> *.local):
-** openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout tls_self.key -out tls_self.crt -days 365 -subj "/CN=*.local" -days 365
-** kubectl create secret tls local-tls --cert=tls_self.crt --key=tls_self.key+
+	* openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout tls_self.key -out tls_self.crt -days 365 -subj "/CN=*.local" -days 365
+	* kubectl create secret tls local-tls --cert=tls_self.crt --key=tls_self.key+
 ** install helm
 
 ## Run Application

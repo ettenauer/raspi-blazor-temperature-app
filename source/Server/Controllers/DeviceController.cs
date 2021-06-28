@@ -5,12 +5,12 @@ using Raspi.Temperature.App.Server.Infrastructure;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Web.Resource;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Raspi.Temperature.App.Server.Controllers
 {
     [ApiController]
-    [RequiredScope("API.Access")]
+    [Authorize(Roles = "ImportUser")]
     [Route("api/[controller]")]
     public class DeviceController : ControllerBase
     {
@@ -23,7 +23,8 @@ namespace Raspi.Temperature.App.Server.Controllers
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        [HttpPut(Name = "NewTemperatureRecord")]
+        [HttpPost]
+        [Route("NewRecord")]
         public async Task<IActionResult> AddTemperatureRecordAsync(NewTemperatureRecordCommand newTemperatureRecord)
         {
             using var context = dbContextFactory.CreateDbContext();

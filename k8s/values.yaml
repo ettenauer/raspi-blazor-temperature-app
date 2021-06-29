@@ -6,9 +6,6 @@ replicaCount: 1
 
 imagePullSecret: "private-docker-registry-cred"
 
-config:
- appConfig: appserver-config
-
 db:
  name: db
  repository: ghcr.io/ettenauer/raspi-blazor-temperature-app-sqldb

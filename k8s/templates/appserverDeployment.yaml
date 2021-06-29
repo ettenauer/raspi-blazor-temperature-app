@@ -37,7 +37,7 @@ spec:
         - name: config-volume
           configMap:
             # Provide the name of the ConfigMap containing the files you want
-            name: {{ .Values.config.appConfig }}
+            name: {{ .Values.app.name }}
             items:
              - key: appsettings.json  # Name of the item we had used inside our ConfigMap (under data:)
                path: appsettings.json # Name of the file to be placed inside /etc

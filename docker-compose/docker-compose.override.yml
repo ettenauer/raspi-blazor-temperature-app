@@ -17,7 +17,7 @@ services:
     environment:
         - ACCEPT_EULA=Y
         - SA_PASSWORD=P@ssword
-        - APP_USER_PASSWORD=@Password
+        - APP_USER_PASSWORD=P3ssword
     volumes:
         - /var/opt/mssql
   importjob:

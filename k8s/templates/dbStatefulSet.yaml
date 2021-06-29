@@ -33,9 +33,15 @@ spec:
             - name: ACCEPT_EULA
               value: "Y"
             - name: SA_PASSWORD
-              value: "P@ssword"
+              valueFrom:
+                secretKeyRef:
+                    name: {{ .Values.db.name }}
+                    key: sa_password
             - name: APP_USER_PASSWORD
-              value: "@Password"
+              valueFrom:
+                secretKeyRef:
+                    name: {{ .Values.db.name }}
+                    key: appuser_password
           volumeMounts:
             - name: mssqldir
               mountPath: /var/opt/mssql

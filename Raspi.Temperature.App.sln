@@ -34,9 +34,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{
 		k8s\templates\appserverDeployment.yaml = k8s\templates\appserverDeployment.yaml
 		k8s\templates\appserverIngress.yaml = k8s\templates\appserverIngress.yaml
 		k8s\templates\appserverService.yaml = k8s\templates\appserverService.yaml
+		k8s\templates\dbSecret.yaml = k8s\templates\dbSecret.yaml
 		k8s\templates\dbService.yaml = k8s\templates\dbService.yaml
 		k8s\templates\dbStatefulSet.yaml = k8s\templates\dbStatefulSet.yaml
+		k8s\templates\importfileConfigmap.yaml = k8s\templates\importfileConfigmap.yaml
 		k8s\templates\importfileJob.yaml = k8s\templates\importfileJob.yaml
+		k8s\templates\importfileSecret.yaml = k8s\templates\importfileSecret.yaml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raspi.Temperature.App.Server.Infrastructure", "source\Server.Infrastructure\Raspi.Temperature.App.Server.Infrastructure.csproj", "{9CEC0664-5FB9-4F34-BF2A-ADEAF938B942}"

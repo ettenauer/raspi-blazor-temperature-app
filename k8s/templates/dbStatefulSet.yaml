@@ -23,8 +23,8 @@ spec:
         - name: {{ .Values.db.name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.imageDb.repository }}:{{ .Values.imageDb.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.imageDb.pullPolicy }}
+          image: "{{ .Values.db.repository }}:{{ .Values.db.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.db.pullPolicy }}
           ports:
             - containerPort: 1433
           env:

@@ -22,8 +22,8 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.imageApp.repository }}:{{ .Values.imageApp.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.imageApp.pullPolicy }}
+          image: "{{ .Values.app.repository }}:{{ .Values.app.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.app.pullPolicy }}
           ports:
             - containerPort: 80
           volumeMounts:

@@ -4,16 +4,6 @@
 
 replicaCount: 1
 
-imageApp:
-  repository: ghcr.io/ettenauer/raspi-blazor-temperature-app
-  pullPolicy: Always
-  tag: "master"
-
-imageDb:
-  repository: ghcr.io/ettenauer/raspi-blazor-temperature-app-sqldb
-  pullPolicy: Always
-  tag: "master"
-
 imagePullSecret: "private-docker-registry-cred"
 
 config:
@@ -21,9 +11,21 @@ config:
 
 db:
  name: db
+ repository: ghcr.io/ettenauer/raspi-blazor-temperature-app-sqldb
+ pullPolicy: Always
+ tag: "master"
+
+importfile:
+ name: importfile
+ repository: ghcr.io/ettenauer/raspi-blazor-temperature-app-importjob
+ pullPolicy: Always
+ tag: "master"
 
 app:
  name: appserver
+ repository: ghcr.io/ettenauer/raspi-blazor-temperature-app
+ pullPolicy: Always
+ tag: "master"
 
 ingress:
  tlsSecret: local-tls

@@ -29,12 +29,6 @@ namespace Raspi.File.Importer
                                         .CreateLogger<Program>();
 
             //Note: we use Environment Variable instead of arguments to prevent issue with Debugging 
-            //-storageAccountName raspistorageettenauer
-            //-storageAccountKey Oz1rgdqeuANyuP/9G8NciS/xx0rNVmxxxui/daEO7dyZlTk2HRCBvnzwqyH5ZK864m+AuBvsz4Z/sdzTT3+VXA==
-            //-identityClientId e0acf883-1358-44dc-a964-e1163d8dca78
-            //-identityClientSecret ZDsvRtSM7E3945vYhvbQfx__9oe__e8~DD
-            //-identityAuthority https://login.microsoftonline.com/db9b3aff-8ab6-40b0-a73b-dddc9ca9f31b
-            //-importUri https://localhost:5001/api/Device/NewRecord
             var config = ParseEnvironmentVaraiables();
 
             var jsonSettings = new JsonSerializerSettings

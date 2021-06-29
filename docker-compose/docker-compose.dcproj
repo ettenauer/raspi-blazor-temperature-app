@@ -6,7 +6,7 @@
     <ProjectGuid>52fffaa9-a291-4486-96c8-b2a889ece779</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
-    <DockerServiceName>raspi.temperature.app.server</DockerServiceName>
+    <DockerServiceName>appserver</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

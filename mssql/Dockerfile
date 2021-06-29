@@ -1,4 +1,4 @@
-FROM microsoft/mssql-server-linux:latest
+FROM mcr.microsoft.com/mssql/server:2019-latest
 
 COPY ["mssql/init.sql", "init.sql"]
 COPY ["mssql/entrypoint.sh", "entrypoint.sh"]

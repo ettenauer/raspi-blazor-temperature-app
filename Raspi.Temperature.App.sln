@@ -57,6 +57,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{76A3
 		.github\workflows\build.yml = .github\workflows\build.yml
 		.github\workflows\docker-raspi-app.yml = .github\workflows\docker-raspi-app.yml
 		.github\workflows\docker-raspi-db.yml = .github\workflows\docker-raspi-db.yml
+		.github\workflows\docker-raspi-importjob.yml = .github\workflows\docker-raspi-importjob.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raspi.File.Importer", "source\Raspi.File.Importer\Raspi.File.Importer.csproj", "{5BAFDB54-96ED-4D06-A156-A73B108F2620}"

@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  raspi.temperature.app.server:
+  appserver:
     image: ${DOCKER_REGISTRY-}raspitemperatureappserver
     build:
       context: ../
@@ -13,4 +13,10 @@ services:
     build:
       context: ../
       dockerfile: mssql/Dockerfile
-
+  importjob:
+    image: ${DOCKER_REGISTRY-}raspifileimporter
+    build:
+      context: ../
+      dockerfile: source/Raspi.File.Importer/Dockerfile
+    depends_on:
+        - appserver

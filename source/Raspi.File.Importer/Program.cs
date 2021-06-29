@@ -21,18 +21,21 @@ namespace Raspi.File.Importer
     {
         static async Task Main(string[] args)
         {
-            const string storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=raspistorageettenauer;AccountKey=Oz1rgdqeuANyuP/9G8NciS/xx0rNVmxxxui/daEO7dyZlTk2HRCBvnzwqyH5ZK864m+AuBvsz4Z/sdzTT3+VXA==;EndpointSuffix=core.windows.net";
-            const string identityClientId = "e0acf883-1358-44dc-a964-e1163d8dca78";
-            const string identityClientSecret = "ZDsvRtSM7E3945vYhvbQfx__9oe__e8~DD";
-            const string identityAuthority = "https://login.microsoftonline.com/db9b3aff-8ab6-40b0-a73b-dddc9ca9f31b";
-            const string deviceApiUri = "https://localhost:5001/api/Device/NewRecord";
-
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging(configure => configure.AddConsole());
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             var logger = serviceProvider.GetService<ILoggerFactory>()
                                         .CreateLogger<Program>();
+
+            //Note: we use Environment Variable instead of arguments to prevent issue with Debugging 
+            //-storageAccountName raspistorageettenauer
+            //-storageAccountKey Oz1rgdqeuANyuP/9G8NciS/xx0rNVmxxxui/daEO7dyZlTk2HRCBvnzwqyH5ZK864m+AuBvsz4Z/sdzTT3+VXA==
+            //-identityClientId e0acf883-1358-44dc-a964-e1163d8dca78
+            //-identityClientSecret ZDsvRtSM7E3945vYhvbQfx__9oe__e8~DD
+            //-identityAuthority https://login.microsoftonline.com/db9b3aff-8ab6-40b0-a73b-dddc9ca9f31b
+            //-importUri https://localhost:5001/api/Device/NewRecord
+            var config = ParseEnvironmentVaraiables();
 
             var jsonSettings = new JsonSerializerSettings
             {
@@ -43,12 +46,12 @@ namespace Raspi.File.Importer
             logger.LogInformation("Starting file importing ...");
 
             try
-            {             
-                var shareService = new ShareServiceClient(storageConnectionString);
+            {
+                var shareService = new ShareServiceClient($"DefaultEndpointsProtocol=https;AccountName={config.StorageAccountName};AccountKey={config.StorageAccountKey};EndpointSuffix=core.windows.net");
 
-                var confidentialClient = ConfidentialClientApplicationBuilder.Create(identityClientId)
-                    .WithClientSecret(identityClientSecret)
-                    .WithAuthority(new Uri(identityAuthority))
+                var confidentialClient = ConfidentialClientApplicationBuilder.Create(config.IdentityClientId)
+                    .WithClientSecret(config.IdentityClientSecret)
+                    .WithAuthority(new Uri(config.IdentityAuthority))
                     .Build();
 
                 using var httpClient = new HttpClient();
@@ -71,7 +74,7 @@ namespace Raspi.File.Importer
                             try
                             {
                                 var payload = JsonConvert.SerializeObject(command, jsonSettings);
-                                await httpClient.PostAsync(new Uri(deviceApiUri), new StringContent(payload, Encoding.UTF8, "application/json"))
+                                await httpClient.PostAsync(new Uri(config.ImportApiUri), new StringContent(payload, Encoding.UTF8, "application/json"))
                                     .ConfigureAwait(false);
                             }
                             catch (Exception e)
@@ -83,7 +86,7 @@ namespace Raspi.File.Importer
 
                         logger.LogInformation($"Import of file {item.Name} is finished");
 
-                        //dir.DeleteFile(item.Name);
+                        dir.DeleteFile(item.Name);
 
                         logger.LogInformation($"File {item.Name} deleted");
                     }
@@ -94,6 +97,26 @@ namespace Raspi.File.Importer
                 //Note: catch all errors, programm will be retriggered again with next job schedule
                 logger.LogError(e, "Import Job failed:");
             }
+        }
+
+        private static ImporterConfig ParseEnvironmentVaraiables()
+        {
+            var config = new ImporterConfig
+            {
+                StorageAccountName = Environment.GetEnvironmentVariable("STORAGEACCOUNTNAME"),
+                StorageAccountKey = Environment.GetEnvironmentVariable("STORAGEACCOUNTKEY"),
+                IdentityClientId = Environment.GetEnvironmentVariable("IDENTITYCLIENTID"),
+                IdentityClientSecret = Environment.GetEnvironmentVariable("IDENTITYCLIENTSECRET"),
+                IdentityAuthority = Environment.GetEnvironmentVariable("IDENTITYAUTHORITY"),
+                ImportApiUri = Environment.GetEnvironmentVariable("IMPORTURI"),
+            };
+
+            if (!config.AllSet)
+            {
+                throw new ArgumentException("missing input parameter"); 
+            }
+
+            return config;
         }
 
         private static async Task<AuthenticationHeaderValue> AcquireAccessTokenAsync(IConfidentialClientApplication confidentialClient)

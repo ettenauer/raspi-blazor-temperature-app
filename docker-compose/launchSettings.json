@@ -4,7 +4,7 @@
       "commandName": "DockerCompose",
       "serviceActions": {
         "importjob": "StartDebugging",
-        "appserver": "StartWithoutDebugging",
+        "appserver": "StartDebugging",
         "db": "StartWithoutDebugging"
       },
       "composeLaunchAction": "LaunchBrowser",

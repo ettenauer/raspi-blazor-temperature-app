@@ -28,3 +28,4 @@ services:
       - IDENTITYCLIENTSECRET=ZDsvRtSM7E3945vYhvbQfx__9oe__e8~DD
       - IDENTITYAUTHORITY=https://login.microsoftonline.com/db9b3aff-8ab6-40b0-a73b-dddc9ca9f31b
       - IMPORTURI=https://appserver/api/Device/NewRecord
+      - DEVELOPMENT = True

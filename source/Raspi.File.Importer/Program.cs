@@ -12,6 +12,7 @@ using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,7 +49,15 @@ namespace Raspi.File.Importer
                     .WithAuthority(new Uri(config.IdentityAuthority))
                     .Build();
 
-                using var httpClient = new HttpClient();
+                var handler = new HttpClientHandler();
+
+                //Note: accept not tursted cert in development mode to make local setup easier 
+                if (config.IsDevelopment)
+                {
+                    handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+                }
+
+                using var httpClient = new HttpClient(handler);
                 httpClient.DefaultRequestHeaders.Authorization = await AcquireAccessTokenAsync(confidentialClient).ConfigureAwait(false);
 
                 var share = shareService.GetShareClient("temperature");
@@ -75,6 +84,7 @@ namespace Raspi.File.Importer
                             {
                                 //Note: not working command will be discarded and logged
                                 logger.LogError(e, "Import call failed");
+                                throw;                                
                             }
                         }
 
@@ -103,6 +113,7 @@ namespace Raspi.File.Importer
                 IdentityClientSecret = Environment.GetEnvironmentVariable("IDENTITYCLIENTSECRET"),
                 IdentityAuthority = Environment.GetEnvironmentVariable("IDENTITYAUTHORITY"),
                 ImportApiUri = Environment.GetEnvironmentVariable("IMPORTURI"),
+                IsDevelopment = Convert.ToBoolean(Environment.GetEnvironmentVariable("DEVELOPMENT") ?? "False")
             };
 
             if (!config.AllSet)

@@ -14,6 +14,8 @@
 
         public string ImportApiUri { get; set; }
 
+        public bool IsDevelopment { get; set; }
+
         public bool AllSet => !string.IsNullOrEmpty(StorageAccountKey) &&
             !string.IsNullOrEmpty(StorageAccountName) &&
             !string.IsNullOrEmpty(IdentityClientId) &&

@@ -62,7 +62,8 @@ namespace Raspi.Temperature.App.Server
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //Note: disable to allow SSL offload 
+            //app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 

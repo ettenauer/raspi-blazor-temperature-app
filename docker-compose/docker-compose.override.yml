@@ -6,7 +6,6 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
     ports:
-      - 5000:80
       - 5001:443
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
@@ -23,9 +22,8 @@ services:
   importjob:
     environment:
       - STORAGEACCOUNTNAME=raspistorageettenauer
-      - STORAGEACCOUNTKEY=Oz1rgdqeuANyuP/9G8NciS/xx0rNVmxxxui/daEO7dyZlTk2HRCBvnzwqyH5ZK864m+AuBvsz4Z/sdzTT3+VXA==
+      - STORAGEACCOUNTKEY=<secret>
       - IDENTITYCLIENTID=e0acf883-1358-44dc-a964-e1163d8dca78
-      - IDENTITYCLIENTSECRET=ZDsvRtSM7E3945vYhvbQfx__9oe__e8~DD
+      - IDENTITYCLIENTSECRET=<secret>
       - IDENTITYAUTHORITY=https://login.microsoftonline.com/db9b3aff-8ab6-40b0-a73b-dddc9ca9f31b
-      - IMPORTURI=https://appserver/api/Device/NewRecord
-      - DEVELOPMENT = True
+      - IMPORTURI=http://appserver/api/Device/NewRecord # use http for communication between containers in order prevent self-signed cert issue, http port is blocked from extern

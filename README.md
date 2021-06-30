@@ -27,7 +27,9 @@ The project is part of proof of concept system to verify following technologies:
 * create secret self-signed TLS certificate for ingress (CN -> *.local):
 	* openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout tls_self.key -out tls_self.crt -days 365 -subj "/CN=*.local" -days 365
 	* kubectl create secret tls local-tls --cert=tls_self.crt --key=tls_self.key+
-** install helm
+* create secrets for azure file share and deamon idenity and update it in https://github.com/ettenauer/raspi-blazor-temperature-app/blob/master/k8s/templates/importfileSecret.yaml
+* update secrets for db https://github.com/ettenauer/raspi-blazor-temperature-app/blob/master/k8s/templates/dbSecret.yaml
+* install helm
 
 ## Run Application
 * helm install local ./helm 

@@ -4,8 +4,6 @@ metadata:
   name: {{ .Values.importfile.name }}
 data:
   storage_accountname: "raspistorageettenauer"
-  storage_accountkey: "Oz1rgdqeuANyuP/9G8NciS/xx0rNVmxxxui/daEO7dyZlTk2HRCBvnzwqyH5ZK864m+AuBvsz4Z/sdzTT3+VXA=="
   identity_clientid: "e0acf883-1358-44dc-a964-e1163d8dca78"
-  identity_clientsecret: "ZDsvRtSM7E3945vYhvbQfx__9oe__e8~DD"
   identity_authority: "https://login.microsoftonline.com/db9b3aff-8ab6-40b0-a73b-dddc9ca9f31b"
-  import_uri: "https://appserver/api/Device/NewRecord"
+  import_uri: "http://appserver/api/Device/NewRecord"

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+  labels:
+    {{- include "helm.selectorLabelsAppServer" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "helm.selectorLabelsAppServer" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "helm.selectorLabelsAppServer" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.app.repository }}:{{ .Values.app.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.app.pullPolicy }}
+          ports:
+            - containerPort: 80
+          volumeMounts:
+          - name: config-volume
+            mountPath: /app/appsettings.json # This should be your final destination
+            subPath: appsettings.json  # The name of the file to be placed inside /etc, the filename used here and in mountPath should be same.
+          resources:
+
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: config-volume
+          configMap:
+            # Provide the name of the ConfigMap containing the files you want
+            name: {{ .Values.app.name }}
+            items:
+             - key: appsettings.json  # Name of the item we had used inside our ConfigMap (under data:)
+               path: appsettings.json # Name of the file to be placed inside /etc
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecret }}

@@ -1,0 +1,53 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Values.importfile.name }}
+  labels:
+    {{- include "helm.labelsImportFile" . | nindent 4 }}
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template: 
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"    
+        spec:
+          containers:
+          - name: {{ .Values.importfile.name }}
+            image: "{{ .Values.importfile.repository }}:{{ .Values.importfile.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.importfile.pullPolicy }}
+            env:
+            - name: STORAGEACCOUNTNAME
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ .Values.importfile.name }}
+                    key: storage_accountname
+            - name: STORAGEACCOUNTKEY
+              valueFrom:
+                secretKeyRef:
+                    name: {{ .Values.importfile.name }}
+                    key: storage_accountkey
+            - name: IDENTITYCLIENTID
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ .Values.importfile.name }}
+                    key: identity_clientid
+            - name: IDENTITYCLIENTSECRET
+              valueFrom:
+                secretKeyRef:
+                    name: {{ .Values.importfile.name }}
+                    key: identity_clientsecret
+            - name: IDENTITYAUTHORITY
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ .Values.importfile.name }}
+                    key: identity_authority
+            - name: IMPORTURI
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ .Values.importfile.name }}
+                    key: import_uri
+          restartPolicy: OnFailure
+          imagePullSecrets:
+            - name: {{ .Values.imagePullSecret }}

@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.db.name }}
+  labels:
+    {{- include "helm.selectorLabelsDb" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "helm.selectorLabelsDb" . | nindent 6 }}
+  serviceName: {{ .Values.db.name }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "helm.selectorLabelsDb" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Values.db.name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.db.repository }}:{{ .Values.db.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.db.pullPolicy }}
+          ports:
+            - containerPort: 1433
+          env:
+            - name: MSSQL_PID 
+              value: "Developer" 
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: SA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                    name: {{ .Values.db.name }}
+                    key: sa_password
+            - name: APP_USER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                    name: {{ .Values.db.name }}
+                    key: appuser_password
+          volumeMounts:
+            - name: mssqldir
+              mountPath: /var/opt/mssql
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+      volumes:
+       - name: mssqldir
+         emptyDir: {}
+
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecret }}

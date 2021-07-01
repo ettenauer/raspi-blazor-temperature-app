@@ -22,8 +22,8 @@ services:
   importjob:
     environment:
       - STORAGEACCOUNTNAME=raspistorageettenauer
-      - STORAGEACCOUNTKEY=<secret>
+      - STORAGEACCOUNTKEY=Kvcw3iA3s2wTxSuo8BtyDsk0kIh0asVKwwklvZK2JF6XfttiGhU9s6Bdwgo8YJTQ1jzqlrkEr4jlRq1ImoNO4w==
       - IDENTITYCLIENTID=e0acf883-1358-44dc-a964-e1163d8dca78
-      - IDENTITYCLIENTSECRET=<secret>
+      - IDENTITYCLIENTSECRET=TTxnt4Uc.8C~0k_Tx_8oX9X0gjLiMYNCRK
       - IDENTITYAUTHORITY=https://login.microsoftonline.com/db9b3aff-8ab6-40b0-a73b-dddc9ca9f31b
-      - IMPORTURI=http://appserver/api/Device/NewRecord # use http for communication between containers in order prevent self-signed cert issue, http port is blocked from extern
+      - IMPORTURI=http://appserver/api/Device/NewRecord

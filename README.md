@@ -5,7 +5,7 @@ The project is part of proof of concept system to verify following technologies:
 * Services hosted in AKS using Helm
 * Blazor WebAssembly
 * Azure Identity 
-* Inner Dev Loop with Docker-Compose and MiniKube
+* Inner Dev Loop with Docker-Compose
 
 ![System Design](https://github.com/ettenauer/raspi-blazor-temperature-app/blob/master/images/SystemDesign.PNG)
 
@@ -34,4 +34,16 @@ The project is part of proof of concept system to verify following technologies:
 ## Run Application
 * helm install local ./helm 
 * app should accessible via ingress -> https://raspi.local/
-* helm uninstall local 
+* helm uninstall local
+
+## Run Application with service mesh ISTIO
+* download istio https://istio.io/downloadIstio
+* update PATH and include istioctl.exe location
+* istioctl install --set profile=demo -y
+* kubectl label namespace default istio-injection=enabled -> required otherwise sidecars are not injected automatically 
+* kubectl apply -f ./istio-k8s/addons -> start addon like kiali or jaeger
+* kubectl create -n istio-system secret tls local-tls --key=tls_self.key --cert=tls_self.crt -> create cert for raspi.local with openssl
+* helm install local .\istio-k8s
+* kubectl get pods -> check if pods have two container 
+* istioctl dashboard kiali -> load dashboard to view system
+* browse https://raspi.local

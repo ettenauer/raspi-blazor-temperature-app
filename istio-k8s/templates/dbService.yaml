@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.db.name }}
+  labels:
+    {{- include "helm.selectorLabelsDb" . | nindent 4 }}
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 1433
+      targetPort: 1433
+      protocol: TCP
+      
+  selector:
+    {{- include "helm.selectorLabelsDb" . | nindent 6 }}

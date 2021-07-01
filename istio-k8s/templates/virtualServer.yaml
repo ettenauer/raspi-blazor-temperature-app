@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ .Values.app.name }}
+  labels:
+    {{- include "helm.selectorLabelsAppServer" . | nindent 4 }}
+spec:
+  hosts:
+  - {{ .Values.ingress.host }}
+  gateways:
+  - {{ .Values.ingress.name }}
+  http:
+  - route:
+    - destination:
+        port:
+          number: 80
+        host: {{ .Values.app.name }}
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+      retryOn: gateway-error,connect-failure,refused-stream

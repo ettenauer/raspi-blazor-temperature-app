@@ -1,0 +1,42 @@
+# Default values for helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+imagePullSecret: "private-docker-registry-cred"
+
+db:
+ name: db
+ repository: ghcr.io/ettenauer/raspi-blazor-temperature-app-sqldb
+ pullPolicy: Always
+ tag: "master"
+
+importfile:
+ name: importfile
+ repository: ghcr.io/ettenauer/raspi-blazor-temperature-app-importjob
+ pullPolicy: Always
+ tag: "master"
+
+app:
+ name: appserver
+ repository: ghcr.io/ettenauer/raspi-blazor-temperature-app
+ pullPolicy: Always
+ tag: "master"
+
+ingress:
+ name: istio-gateway
+ tlsSecret: local-tls
+ host: raspi.local
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  requests:
+   memory: "1Gi"
+   cpu: "50m"
+  limits:
+   memory: "2Gi"
+   cpu: "500m"

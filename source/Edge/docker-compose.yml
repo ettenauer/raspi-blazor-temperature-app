@@ -4,5 +4,5 @@ services:
   hellopi:
     image: edge
     build:
-      context: .
+      context: ../../
       dockerfile: ./Dockerfile

@@ -9,6 +9,7 @@ ENV PYTHONUNBUFFERED=1
 
 # Install pip requirements
 COPY ["source/Edge/requirements.txt", "requirements.txt"]
+COPY ["source/Edge/program.py", "program.py"]
 RUN python -m pip install -r requirements.txt
 
 WORKDIR /app

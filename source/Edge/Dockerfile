@@ -10,6 +10,7 @@ ENV PYTHONUNBUFFERED=1
 # Install pip requirements
 COPY ["source/Edge/requirements.txt", "requirements.txt"]
 RUN python -m pip install -r requirements.txt
+RUN apt-get install RPi.GPIO
 
 WORKDIR /app
 COPY ["source/Edge/","/app"]

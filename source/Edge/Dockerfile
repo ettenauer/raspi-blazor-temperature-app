@@ -1,5 +1,5 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
-FROM python:3.8-alpine
+FROM python:3.8
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -10,7 +10,6 @@ ENV PYTHONUNBUFFERED=1
 # Install pip requirements
 COPY ["source/Edge/requirements.txt", "requirements.txt"]
 RUN python -m pip install -r requirements.txt
-RUN pip install rpi.gpio
 
 WORKDIR /app
 COPY ["source/Edge/","/app"]

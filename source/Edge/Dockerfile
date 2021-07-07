@@ -7,11 +7,11 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
 
-RUN apt-get update
+RUN apk update
 
 # Install pip requirements
 COPY ["source/Edge/requirements.txt", "requirements.txt"]
-RUN xargs -a requirements.txt apt-get -y install
+RUN xargs -a requirements.txt apk add 
 
 WORKDIR /app
 COPY ["source/Edge/","/app"]

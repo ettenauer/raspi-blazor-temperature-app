@@ -2,7 +2,4 @@ version: '3.4'
 
 services:
   hellopi:
-    image: edge
-    build:
-      context: ../../
-      dockerfile: ./Dockerfile
+    image: ghcr.io/ettenauer/raspi-blazor-temperature-app-edge:master

@@ -8,14 +8,12 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 RUN apk update
-
-# Install pip requirements
-#COPY ["source/Edge/requirements.txt", "requirements.txt"]
-#RUN xargs -a requirements.txt apk add 
-
 RUN apk add python3
 RUN apk add py3-pip
-RUN pip3 install pigpio
+
+# Install pip requirements
+COPY ["source/Edge/requirements.txt", "requirements.txt"]
+RUN pip3 install -r requirements.txt
 
 WORKDIR /app
 COPY ["source/Edge/","/app"]

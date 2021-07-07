@@ -15,7 +15,7 @@ RUN apk update
 
 RUN apk add python3
 RUN apk add py3-pip
-RUN apk add python3-pigpio
+RUN pip3 install pigpio
 
 WORKDIR /app
 COPY ["source/Edge/","/app"]

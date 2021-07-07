@@ -13,9 +13,11 @@ RUN apt-get update
 COPY ["source/Edge/requirements.txt", "requirements.txt"]
 RUN xargs -a requirements.txt apt-get -y install
 
-RUN git clone https://github.com/joan2937/pigpio \
- && cd pigpio \
- && make install prefix=/tmp/pigpio CFLAGS=-DEMBEDDED_IN_VM
+#RUN git clone https://github.com/joan2937/pigpio \
+# && cd pigpio \
+# && make install prefix=/tmp/pigpio CFLAGS=-DEMBEDDED_IN_VM
+
+RUN sudo apt install pigpio
 
 WORKDIR /app
 COPY ["source/Edge/","/app"]
@@ -26,7 +28,7 @@ RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /
 USER appuser
 
 # start daemon for GPIO
-RUN pigpiod
+RUN sudo systemctl start pigpiod
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 CMD ["python", "program.py"]

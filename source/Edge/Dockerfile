@@ -10,8 +10,11 @@ ENV PYTHONUNBUFFERED=1
 RUN apk update
 
 # Install pip requirements
-COPY ["source/Edge/requirements.txt", "requirements.txt"]
-RUN xargs -a requirements.txt apk add 
+#COPY ["source/Edge/requirements.txt", "requirements.txt"]
+#RUN xargs -a requirements.txt apk add 
+
+RUN apk add python3
+RUN apk add py3-pip
 
 WORKDIR /app
 COPY ["source/Edge/","/app"]

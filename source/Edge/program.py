@@ -1,11 +1,10 @@
-import Adafruit_DHT
+import os
+import pigpio
+import DHT22
 
-DHT_SENSOR = Adafruit_DHT.DHT22
-DHT_PIN = 17
+os.chgdir('pigpio_dht22')
+pi = pigpio.pi()
+s = DHT22.sensor(pi, 17)
+s.trigger()
 
-humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-
-if humidity is not None and temperature is not None:
-   print("Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(temperature, humidity))
-else:
-   print("Failed to retrieve data from humidity sensor")
+print('{:3.2f}'.format(s.temperature()/1.))

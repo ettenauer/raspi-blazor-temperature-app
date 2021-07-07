@@ -1,10 +1,8 @@
-import os
-import pigpio
-import DHT22
+from pigpio_dht import DHT22
 
-os.chgdir('pigpio_dht22')
-pi = pigpio.pi()
-s = DHT22.sensor(pi, 17)
-s.trigger()
+gpio = 17 
 
-print('{:3.2f}'.format(s.temperature()/1.))
+sensor = DHT22(gpio)
+
+result = sensor.read()
+print(result)

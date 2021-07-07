@@ -11,7 +11,7 @@ RUN apt-get update
 
 # Install pip requirements
 COPY ["source/Edge/requirements.txt", "requirements.txt"]
-RUN xargs -a requirements.txt apt-get install
+RUN xargs -a requirements.txt apt-get -y install
 
 RUN git clone https://github.com/joan2937/pigpio \
  && cd pigpio \

@@ -13,6 +13,10 @@ RUN apt-get update
 COPY ["source/Edge/requirements.txt", "requirements.txt"]
 RUN xargs -a requirements.txt apt-get install
 
+RUN git clone https://github.com/joan2937/pigpio \
+ && cd pigpio \
+ && make install prefix=/tmp/pigpio CFLAGS=-DEMBEDDED_IN_VM
+
 WORKDIR /app
 COPY ["source/Edge/","/app"]
 

@@ -1,6 +1,3 @@
 build-essential
 python-setuptools
 python3-setuptools
-pigpio
-python-pigpio
-python3-pigpio

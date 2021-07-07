@@ -11,7 +11,7 @@ RUN apt-get update
 
 # Install pip requirements
 COPY ["source/Edge/requirements.txt", "requirements.txt"]
-RUN apt-get install $(cat requirements.txt) 
+RUN xargs -a requirements.txt apt-get install
 
 WORKDIR /app
 COPY ["source/Edge/","/app"]

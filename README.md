@@ -48,3 +48,18 @@ The project is part of proof of concept system to verify following technologies:
 * kubectl get pods -> check if pods have two container 
 * istioctl dashboard kiali -> load dashboard to view system
 * browse https://raspi.local
+
+# Run Edge Application on Raspberry Pi
+
+## Steps
+1. set up raspberry with ansible, please check out instruction here https://github.com/ettenauer/raspi-ansible
+2. deploy playbook https://github.com/ettenauer/raspi-ansible/blob/main/DHT22.yaml on you raspberry pi
+3. connect via ssh to your raspberry pi
+4. use docker or docker compose to run image ghcr.io/ettenauer/raspi-blazor-temperature-app-edge:master
+
+## docker
+* docker pull ghcr.io/ettenauer/raspi-blazor-temperature-app-edge:master
+* docker run --network="host" ghcr.io/ettenauer/raspi-blazor-temperature-app-edge:master
+
+## docker-compose
+* docker-compose up -> yml can found here https://github.com/ettenauer/raspi-blazor-temperature-app/blob/master/source/Edge/docker-compose.yml

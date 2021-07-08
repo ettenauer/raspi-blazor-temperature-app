@@ -1,5 +1,7 @@
 version: '3.4'
 
 services:
-  hellopi:
+  edge-device:
     image: ghcr.io/ettenauer/raspi-blazor-temperature-app-edge:master
+    networks:
+      - host

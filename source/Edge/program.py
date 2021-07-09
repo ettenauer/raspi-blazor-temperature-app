@@ -24,23 +24,22 @@ while True:
             writer.writerow(["Date", "DegreeCelsius", "DeviceId"])
             while rowCount < 100:
                 data = sensor.sample(samples=30)
-                if data.valid == True:
-                    print("write measurement to local file")
-                    writer.writerow([datetime.utcnow().isoformat(), data.temp_c, DEVICE_ID])
+                if data["valid"] == True:
+                    print(f"write measurement to local file {filename}")
+                    writer.writerow([datetime.utcnow().isoformat(), data["temp_c"], DEVICE_ID])
                     rowCount = rowCount + 1
 
         file_client = ShareFileClient.from_connection_string(conn_str=connection_string, share_name=SHARE, file_path=filename)
 
         with open(filename, "rb") as source_file:
-            print("upload measurement to azure storage")
+            print(f"upload {filename} measurement to azure storage")
             file_client.upload_file(source_file)
 
         try:
             os.remove(filename)
         except OSError as e:
-            print ("Error during file delete: %s - %s." % (e.filename, e.strerror))   
+            print(f"Error during file delete: {e.filename}") 
 
-    except:
-        raise
-
+    except Exception as ex:
+        print(ex)
     

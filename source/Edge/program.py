@@ -22,7 +22,7 @@ while True:
         with open(filename, 'w', newline='') as file:
             writer = csv.writer(file, delimiter=';')
             writer.writerow(["Date", "DegreeCelsius", "DeviceId"])
-            while rowCount < 100:
+            while rowCount < 10:
                 data = sensor.sample(samples=30)
                 if data["valid"] == True:
                     print(f"write measurement to local file {filename}")

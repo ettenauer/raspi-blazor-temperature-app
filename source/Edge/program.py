@@ -23,11 +23,13 @@ while True:
             writer = csv.writer(file, delimiter=';')
             writer.writerow(["Date", "DegreeCelsius", "DeviceId"])
             while rowCount < 10:
-                data = sensor.sample(samples=30)
-                if data["valid"] == True:
+                try:
+                    data = sensor.sample(samples=30)
                     print(f"write measurement to local file {filename}")
                     writer.writerow([datetime.utcnow().isoformat(), data["temp_c"], DEVICE_ID])
                     rowCount = rowCount + 1
+                except Exception as ex:
+                    print(ex)
 
         file_client = ShareFileClient.from_connection_string(conn_str=connection_string, share_name=SHARE, file_path=filename)
 

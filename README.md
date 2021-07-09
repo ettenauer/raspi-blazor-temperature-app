@@ -57,9 +57,7 @@ The project is part of proof of concept system to verify following technologies:
 3. connect via ssh to your raspberry pi
 4. use docker or docker compose to run image ghcr.io/ettenauer/raspi-blazor-temperature-app-edge:master
 
-## docker
-* docker pull ghcr.io/ettenauer/raspi-blazor-temperature-app-edge:master
-* docker run --network="host" ghcr.io/ettenauer/raspi-blazor-temperature-app-edge:master
-
 ## docker-compose
-* docker-compose up -> yml can found here https://github.com/ettenauer/raspi-blazor-temperature-app/blob/master/source/Edge/docker-compose.yml
+* download https://github.com/ettenauer/raspi-blazor-temperature-app/blob/master/source/Edge/docker-compose.yml
+* update environment variables to reflect used setup 
+* docker-compose up 

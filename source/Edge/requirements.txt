@@ -1,2 +1,3 @@
 pigpio
 pigpio-dht
+azure-storage-file

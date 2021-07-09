@@ -24,7 +24,7 @@ while True:
             writer.writerow(["Date", "DegreeCelsius", "DeviceId"])
             while rowCount < 10:
                 try:
-                    data = sensor.sample(samples=30)
+                    data = sensor.sample(samples=15)
                     print(f"write measurement to local file {filename}")
                     writer.writerow([datetime.utcnow().isoformat(), data["temp_c"], DEVICE_ID])
                     rowCount = rowCount + 1

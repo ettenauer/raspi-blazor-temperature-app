@@ -13,7 +13,7 @@ DEVICE_ID = os.environ['DEVICE_ID']
 SHARE = os.environ['SHARE']
 
 connection_string = "DefaultEndpointsProtocol=https;AccountName={};AccountKey={};EndpointSuffix=core.windows.net".format(ACCOUNT_NAME, ACCOUNT_KEY)
-sensor = DHT22(DATA_PIN)
+sensor = DHT22(DATA_PIN, timeout_secs=2)
  
 while True:
     try: 

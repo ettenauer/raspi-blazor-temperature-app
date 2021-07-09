@@ -13,7 +13,7 @@ DEVICE_ID = os.environ['DEVICE_ID']
 SHARE = os.environ['SHARE']
 
 connection_string = "DefaultEndpointsProtocol=https;AccountName={};AccountKey={};EndpointSuffix=core.windows.net".format(ACCOUNT_NAME, ACCOUNT_KEY)
-sensor = DHT22(DATA_PIN, timeout_secs=2)
+sensor = DHT22(DATA_PIN, timeout_secs=1)
  
 while True:
     try: 
@@ -24,7 +24,7 @@ while True:
             writer.writerow(["Date", "DegreeCelsius", "DeviceId"])
             while rowCount < 10:
                 try:
-                    data = sensor.sample(samples=15)
+                    data = sensor.sample(samples=10)
                     print(f"write measurement to local file {filename}")
                     writer.writerow([datetime.utcnow().isoformat(), data["temp_c"], DEVICE_ID])
                     rowCount = rowCount + 1

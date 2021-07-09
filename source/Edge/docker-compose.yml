@@ -7,6 +7,5 @@ services:
     environment:
     - ACCOUNT_NAME=raspistorageettenauer
     - ACCOUNT_KEY=Kvcw3iA3s2wTxSuo8BtyDsk0kIh0asVKwwklvZK2JF6XfttiGhU9s6Bdwgo8YJTQ1jzqlrkEr4jlRq1ImoNO4w==
-    - DATA_PIN=17
     - DEVICE_ID=1
     - SHARE=temperature 

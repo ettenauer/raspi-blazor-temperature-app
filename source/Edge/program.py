@@ -8,7 +8,7 @@ import csv
 
 ACCOUNT_NAME = os.environ['ACCOUNT_NAME']
 ACCOUNT_KEY = os.environ['ACCOUNT_KEY']
-DATA_PIN = os.environ['DATA_PIN']
+DATA_PIN = 17
 DEVICE_ID = os.environ['DEVICE_ID']
 SHARE = os.environ['SHARE']
 

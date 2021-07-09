@@ -25,20 +25,22 @@ while True:
             while rowCount < 100:
                 data = sensor.sample(samples=30)
                 if data.valid == True:
+                    print("write measurement to local file")
                     writer.writerow([datetime.utcnow().isoformat(), data.temp_c, DEVICE_ID])
                     rowCount = rowCount + 1
 
         file_client = ShareFileClient.from_connection_string(conn_str=connection_string, share_name=SHARE, file_path=filename)
 
         with open(filename, "rb") as source_file:
+            print("upload measurement to azure storage")
             file_client.upload_file(source_file)
 
         try:
             os.remove(filename)
         except OSError as e:
-            print ("Error: %s - %s." % (e.filename, e.strerror))   
+            print ("Error during file delete: %s - %s." % (e.filename, e.strerror))   
 
     except:
-        print("Unexpected error:", sys.exc_info()[0])
+        raise
 
     

@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.db.name }}
+  labels:
+    {{- include "helm.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "helm.selectorLabelsDb" . | nindent 6 }}
+  serviceName: {{ .Values.db.name }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "helm.selectorLabelsDb" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Values.db.name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.db.repository }}:{{ .Values.db.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.db.pullPolicy }}
+          ports:
+            - containerPort: 1433
+          env:
+            - name: MSSQL_PID 
+              value: "Developer" 
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: SA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                    name: db-cred
+                    key: sa
+            - name: APP_USER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                    name: db-cred
+                    key: appuser
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: /mnt/secrets
+              readOnly: true
+            - name: mssqldir
+              mountPath: /var/opt/mssql
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+      volumes:
+       - name: mssqldir
+         persistentVolumeClaim:
+            claimName: {{ .Values.db.name }}
+       - name: secrets-store-inline
+         csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "secretstore"
+            nodePublishSecretRef:
+              name: secrets-store-creds
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecret }}

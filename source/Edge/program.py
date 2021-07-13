@@ -18,7 +18,7 @@ sensor = DHT22(DATA_PIN, timeout_secs=1)
 while True:
     try: 
         rowCount = 0
-        filename = DEVICE_ID + "_" + datetime.utcnow().strftime("%Y-%M-%d-%H%M%S")
+        filename = DEVICE_ID + "_" + datetime.utcnow().strftime("%Y-%M-%d-%H%M%S") + ".csv"
         with open(filename, 'w', newline='') as file:
             writer = csv.writer(file, delimiter=';')
             writer.writerow(["Date", "DegreeCelsius", "DeviceId"])

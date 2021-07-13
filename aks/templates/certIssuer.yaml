@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+   name: {{ .Values.cert.name }}
+spec:
+   acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: ettenauer@outlook.com
+    privateKeySecretRef:
+      name: {{ .Values.cert.name }}
+    solvers:
+    - http01:
+       ingress:
+          class: azure/application-gateway

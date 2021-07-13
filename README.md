@@ -27,13 +27,13 @@ The project is part of proof of concept system to verify following technologies:
 	* kubectl create secret docker-registry private-docker-registry-cred --docker-server=https://ghcr.io --docker-username=<USERNAME> --docker-password=<PASSWORD> --namespace=default -o yaml
 * create secret self-signed TLS certificate for ingress (CN -> *.local):
 	* openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout tls_self.key -out tls_self.crt -days 365 -subj "/CN=*.local" -days 365
-	* kubectl create secret tls local-tls --cert=tls_self.crt --key=tls_self.key+
+	* kubectl create secret tls local-tls --cert=tls_self.crt --key=tls_self.key
 * create secrets for azure file share and deamon idenity and update it in https://github.com/ettenauer/raspi-blazor-temperature-app/blob/master/k8s/templates/importfileSecret.yaml
 * update secrets for db https://github.com/ettenauer/raspi-blazor-temperature-app/blob/master/k8s/templates/dbSecret.yaml
 * install helm
 
 ## Run Application
-* helm install local ./helm 
+* helm install local ./k8s 
 * app should accessible via ingress -> https://raspi.local/
 * helm uninstall local
 
@@ -48,6 +48,27 @@ The project is part of proof of concept system to verify following technologies:
 * kubectl get pods -> check if pods have two container 
 * istioctl dashboard kiali -> load dashboard to view system
 * browse https://raspi.local
+
+## Run Application in AKS
+
+### setup AKS cluster
+* use azrue cli or portal https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal
+
+### setup Application Gateway Ingress Controller Addon (AGIC)
+* check out https://docs.microsoft.com/en-us/azure/application-gateway/tutorial-ingress-controller-add-on-existing and follow instructions
+
+### setup cert-manager
+* kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yaml
+
+### setup Azure Key Vault for secrets
+* check out https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-driver
+* we want to access key vault via https://azure.github.io/secrets-store-csi-driver-provider-azure/configurations/identity-access-modes/service-principal-mode/
+* grant permission in your keyvault to created/used service-principal
+* check out https://azure.github.io/secrets-store-csi-driver-provider-azure/configurations/sync-with-k8s-secrets/
+* you need to enable secrets-store-csi-driver.syncSecret.enabled=true in your installation for csi-driver
+
+### run application
+* helm install local .\aks
 
 # Run Edge Application on Raspberry Pi
 

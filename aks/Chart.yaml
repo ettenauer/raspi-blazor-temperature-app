@@ -1,0 +1,6 @@
+apiVersion: v2
+name: raspi-temp-app
+description: Recorded temperature values from raspi are visualized to users
+type: application
+version: 0.1.0
+appVersion: "0.0.1"

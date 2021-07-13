@@ -1,0 +1,62 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Values.importfile.name }}
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: {{ .Values.importfile.name }}
+            image: "{{ .Values.importfile.repository }}:{{ .Values.importfile.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.importfile.pullPolicy }}
+            volumeMounts:
+              - name: secrets-store-inline
+                mountPath: "/mnt/secrets"
+                readOnly: true
+            env:
+            - name: STORAGEACCOUNTNAME
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ .Values.importfile.name }}
+                    key: storage_accountname
+            - name: STORAGEACCOUNTKEY
+              valueFrom:
+                secretKeyRef:
+                    name: importfile-cred
+                    key: storagekey
+            - name: IDENTITYCLIENTID
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ .Values.importfile.name }}
+                    key: identity_clientid
+            - name: IDENTITYCLIENTSECRET
+              valueFrom:
+                secretKeyRef:
+                    name: importfile-cred
+                    key: identitykey
+            - name: IDENTITYAUTHORITY
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ .Values.importfile.name }}
+                    key: identity_authority
+            - name: IMPORTURI
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ .Values.importfile.name }}
+                    key: import_uri
+
+          restartPolicy: OnFailure
+          volumes:
+            - name: secrets-store-inline
+              csi:
+                driver: secrets-store.csi.k8s.io
+                readOnly: true
+                volumeAttributes:
+                  secretProviderClass: "secretstore"
+                nodePublishSecretRef:
+                  name: secrets-store-creds
+          imagePullSecrets:
+          - name: {{ .Values.imagePullSecret }}

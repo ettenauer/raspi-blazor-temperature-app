@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.app.name }}
+data:
+  appsettings.json: |-
+        {
+          "AzureAd": {
+            "Instance": "https://login.microsoftonline.com/",
+            "Domain": "ettenaueroutlook.onmicrosoft.com",
+            "TenantId": "db9b3aff-8ab6-40b0-a73b-dddc9ca9f31b",
+            "ClientId": "e0acf883-1358-44dc-a964-e1163d8dca78",
+            "CallbackPath": "/signin-oidc",
+            "Audience": "https://ettenaueroutlook.onmicrosoft.com/RaspiTempApp"
+          },
+          "ConnectionStrings": {
+            "RaspiDb": "Server=db;Database=RaspiDB;User Id=appuser;Password=P@ssword;"
+          },
+          "Logging": {
+            "LogLevel": {
+              "Default": "Information",
+              "Microsoft": "Warning",
+              "Microsoft.Hosting.Lifetime": "Information"
+            }
+          },
+          "AllowedHosts": "*"
+        }

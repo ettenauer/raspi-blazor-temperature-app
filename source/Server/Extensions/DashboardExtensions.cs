@@ -15,7 +15,7 @@ namespace Raspi.Temperature.App.Server.Extensions
                 DeviceId = source.Id,
                 From = from,
                 To = to,
-                TemperatureHistory = source.TemperatureHistory.Select(_ => new TemperatureRecord
+                TemperatureHistory = source.TemperatureHistory.Take(5000).Select(_ => new TemperatureRecord
                 {
                     Date = _.Date,
                     DegreeCelsius = _.DegreeCelsius

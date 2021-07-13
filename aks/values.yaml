@@ -33,6 +33,8 @@ cert:
 
 secretStore:
   name: secretstore
+  vault: etti-key-vault
+  svp: secrets-store-creds
 
 resources:
   # We usually recommend not to specify default resources and to leave this as a conscious

@@ -14,7 +14,7 @@ spec:
             imagePullPolicy: {{ .Values.importfile.pullPolicy }}
             volumeMounts:
               - name: secrets-store-inline
-                mountPath: "/mnt/secrets"
+                mountPath: /mnt/secrets
                 readOnly: true
             env:
             - name: STORAGEACCOUNTNAME
@@ -55,8 +55,8 @@ spec:
                 driver: secrets-store.csi.k8s.io
                 readOnly: true
                 volumeAttributes:
-                  secretProviderClass: "secretstore"
+                  secretProviderClass: {{ .Values.secretStore.name }}
                 nodePublishSecretRef:
-                  name: secrets-store-creds
+                  name: {{ .Values.secretStore.svp }}
           imagePullSecrets:
           - name: {{ .Values.imagePullSecret }}

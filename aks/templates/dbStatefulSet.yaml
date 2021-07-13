@@ -60,8 +60,8 @@ spec:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
-              secretProviderClass: "secretstore"
+              secretProviderClass: {{ .Values.secretStore.name }}
             nodePublishSecretRef:
-              name: secrets-store-creds
+              name: {{ .Values.secretStore.svp }}
       imagePullSecrets:
         - name: {{ .Values.imagePullSecret }}

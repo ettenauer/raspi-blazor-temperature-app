@@ -49,18 +49,18 @@ The project is part of proof of concept system to verify following technologies:
 * istioctl dashboard kiali -> load dashboard to view system
 * browse https://raspi.local
 
-## Run Application in AKS
+# Run Application in AKS
 
-### setup AKS cluster
+## setup AKS cluster
 * use azrue cli or portal https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal
 
-### setup Application Gateway Ingress Controller Addon (AGIC)
+## setup Application Gateway Ingress Controller Addon (AGIC)
 * check out https://docs.microsoft.com/en-us/azure/application-gateway/tutorial-ingress-controller-add-on-existing and follow instructions
 
-### setup cert-manager
+## setup cert-manager
 * kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yaml
 
-### setup Azure Key Vault for secrets
+## setup Azure Key Vault for secrets
 * check out https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-driver
 * we want to access key vault via https://azure.github.io/secrets-store-csi-driver-provider-azure/configurations/identity-access-modes/service-principal-mode/
 * grant permission in your keyvault to created/used service-principal

@@ -68,7 +68,7 @@ else
 
     private async Task UpdateChartAsync(Device device, DeviceDashboard deviceDashboard)
     {
-        var groupedValues = deviceDashboard.TemperatureHistory.GroupBy(_ => _.Date.ToString("dd.MM"), _ => _.DegreeCelsius);
+        var groupedValues = deviceDashboard.TemperatureHistory.GroupBy(_ => _.Date.ToString("dd.MM HH:00"), _ => _.DegreeCelsius);
         var lables = groupedValues.Select(_ => _.Key);
         var values = groupedValues.Select(_ => _.Max());
         await JS.InvokeVoidAsync("updateChart", "deviceChart", $"Degree Celisus from {device.Name}", lables, values);
